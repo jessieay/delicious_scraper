@@ -1,15 +1,14 @@
 require 'nokogiri'
 require 'open-uri'
-require 'pry'
 
 username = ARGV[0]
 number_of_pages = ARGV[1].to_i
-
 page_data = []
 
-(1..number_of_pages).to_a.each do |number|
-  url = "http://del.icio.us/#{username}?&page=#{number}"
-  doc = Nokogiri::HTML(open(url))
+(1..number_of_pages).to_a.each do |page|
+  delicious_url = "http://del.icio.us/#{username}?&page=#{number}"
+  doc = Nokogiri::HTML(open(delicious_url))
+
   date_selector = '.articleThumbBlockOuter'
 
   dates = doc.search(date_selector).map do |date|
@@ -52,22 +51,21 @@ page_data = []
 
   formatted_attributes = grouped_attributes.map do |attrs|
     "<DT><A HREF='#{attrs[0]}' ADD_DATE='#{attrs[1]}'"\
-    " PRIVATE='0' TAGS='#{attrs[2]}'>"\
-    "#{attrs[3]}</A><DD>#{attrs[4]}"
+      " PRIVATE='0' TAGS='#{attrs[2]}'>"\
+      "#{attrs[3]}</A><DD>#{attrs[4]}"
   end
 
   page_data << formatted_attributes
 end
 
 top_text = "<!DOCTYPE NETSCAPE-Bookmark-file-1>"\
-"<META HTTP-EQUIV='Content-Type' CONTENT='text/html; charset=UTF-8'>"\
-"<TITLE>Bookmarks</TITLE>"\
-"<H1>Bookmarks</H1>"\
-"<DL><p>"
+  "<META HTTP-EQUIV='Content-Type' CONTENT='text/html; charset=UTF-8'>"\
+  "<TITLE>Bookmarks</TITLE>"\
+  "<H1>Bookmarks</H1>"\
+  "<DL><p>"
 
 bottom_text = "</DL><p>"
 
 File.open("delicious_export.html", "w") do |f|
   f.write(top_text + page_data.join("\n") + bottom_text)
 end
-
