@@ -18,5 +18,10 @@ broken).
 Example: (for my account, http://del.icio.us/jessieayoung)
 
 ```
+$ git clone git@github.com:jessieay/delicious_scraper.git
+$ cd delicous_scraper
 $ ruby tasty_scraper.rb jessieayoung 85
 ```
+
+This will output a file called `delicious_export.html`, which you can import
+directly to Pinboard.
