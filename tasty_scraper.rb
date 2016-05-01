@@ -2,12 +2,13 @@ require 'nokogiri'
 require 'open-uri'
 require 'pry'
 
-number_of_pages = ARGV[0].to_i
+username = ARGV[0]
+number_of_pages = ARGV[1].to_i
 
 page_data = []
 
 (1..number_of_pages).to_a.each do |number|
-  url = "http://del.icio.us/jessieayoung?&page=#{number}"
+  url = "http://del.icio.us/#{username}?&page=#{number}"
   doc = Nokogiri::HTML(open(url))
   date_selector = '.articleThumbBlockOuter'
 
@@ -58,7 +59,15 @@ page_data = []
   page_data << formatted_attributes
 end
 
+top_text = "<!DOCTYPE NETSCAPE-Bookmark-file-1>"\
+"<META HTTP-EQUIV='Content-Type' CONTENT='text/html; charset=UTF-8'>"\
+"<TITLE>Bookmarks</TITLE>"\
+"<H1>Bookmarks</H1>"\
+"<DL><p>"
+
+bottom_text = "</DL><p>"
+
 File.open("delicious_export.html", "w") do |f|
-  f.write(page_data.join("\n"))
+  f.write(top_text + page_data.join("\n") + bottom_text)
 end
 
