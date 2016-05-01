@@ -1,6 +1,5 @@
 require 'nokogiri'
 require 'open-uri'
-require 'pry'
 
 username = ARGV[0]
 number_of_pages = ARGV[1].to_i
