@@ -6,7 +6,7 @@ number_of_pages = ARGV[1].to_i
 page_data = []
 
 (1..number_of_pages).to_a.each do |page|
-  delicious_url = "http://del.icio.us/#{username}?&page=#{number}"
+  delicious_url = "http://del.icio.us/#{username}?&page=#{page}"
   doc = Nokogiri::HTML(open(delicious_url))
 
   date_selector = '.articleThumbBlockOuter'
