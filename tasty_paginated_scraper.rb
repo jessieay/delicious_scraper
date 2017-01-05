@@ -10,7 +10,7 @@ ranges.each do |range|
   page_data = []
 
   range.each do |page|
-    delicious_url = "http://del.icio.us/#{username}?&page=#{page}"
+    delicious_url = "https://del.icio.us/#{username}?&page=#{page}"
     doc = Nokogiri::HTML(open(delicious_url))
 
     date_selector = '.articleThumbBlockOuter'
