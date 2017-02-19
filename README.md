@@ -32,7 +32,7 @@ This will output a file called `delicious_export.html`, which you can import
 directly to Pinboard.
 
 If you are having issues importing your bookmarks to Pinboard, this may mean
-that you have a bookmark with "unescaped markup" (eg: `<a>` tag) omewhere in
+that you have a bookmark with "unescaped markup" (eg: `<a>` tag) somewhere in
 your export.
 
 Opening one extremely large export file can be difficult for a laptop. So, I
